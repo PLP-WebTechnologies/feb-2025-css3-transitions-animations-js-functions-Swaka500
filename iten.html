@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3 Transitions, Animations, and Advanced JavaScript Functions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            transition: background-color 0.3s ease;
+        }
+        h1 {
+            color: white;
+            background-color: #007bff;
+        }
+        .myimg {
+            margin: 50px;
+            padding: 12px 24px;
+            font-size: 30px;
+            background-color: #007bff;
+            color: white;
+            border: 2px solid red;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .theme-btn:hover {
+            transform: scale(1.1);
+            background-color: #0056b3;
+        }
+        .animated-img {
+            width: 300px;
+            transition: transform 0.5s ease;
+            border: 2px solid red;
+        }
+        .animated-img.animate {
+            transform: rotate(360deg);
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple CSS3 Transitions, Animations, and Local Storage created by Derrick</h1>
+    <p>Click the buttons to change the theme and rotate the image.</p>
+    <button class="myimg" onclick="changeTheme()">Click here to change the theme</button>
+    <button class="myimg" onclick="animateImage()">Click me to rotate the image</button>
+    <img src="img1.jpeg" alt="myimage" class="animated-img" id="image">
+    <script>
+        const themes = ['#007bff', '#28a745', '#ffc107', '#17a2b8', '#e83e8c'];
+        let currentThemeIndex = 0;
+
+        function changeTheme() {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            const newColor = themes[currentThemeIndex];
+            document.body.style.backgroundColor = newColor;
+            localStorage.setItem('theme', newColor);
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.style.backgroundColor = savedTheme;
+            }
+        }
+
+        function animateImage() {
+            const image = document.getElementById('image');
+            image.classList.toggle('animate');
+        }
+
+        window.onload = loadTheme;
+    </script>
+</body>
+</html>
